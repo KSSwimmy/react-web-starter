@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import Form from './Form'
+//import Form from './Form'
 import './App.css';
 
 export default () => {
-  const [todos, setTodos] = useState([]);
+  const [count, setCount] = useState(0);
 
   return (
     <div className="App">
+      <div>
+         count: {count} 
 
-        <Form onSubmit={text => setTodos([
-          { text, complete: false }, 
-          ...todos])} />  
-        <div>
-          {todos.map(({ text }) => (
-            <div 
-            key={text}>{text}</div>
-            ))}
-        </div>
-
+         <button onClick={() => setCount(count+ 1)}>
+           +
+         </button>
+      </div>
     </div>
   );
 }
