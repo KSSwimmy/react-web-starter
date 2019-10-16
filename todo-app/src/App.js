@@ -4,6 +4,7 @@ import './App.css';
 
 export default () => {
   const [count, setCount] = useState(0);
+  const [todo, setTodo] = useState([]);
 
   return (
     <div className="App">
@@ -14,7 +15,15 @@ export default () => {
            +
          </button>
       </div>
-      <Form /> 
+      <Form onSubmit={text => setTodo([{text, complete: false}, ...todo]) } />
+
+      <div>
+        {
+          todo.map(({ text }) => ( <div key={text}>{text}</div>
+            ))
+        }
+      </div>
+
     </div>
   );
 }

@@ -12,17 +12,22 @@
 
  export default ({onSubmit}) => {
    const text = useInputValue('');
-   const email = useInputValue('')
+   
 
   return (
-   <div> 
+   <form onSubmit={event => {
+     event.preventDefault();
+     onSubmit(text.value)
+  }} > 
 
- <input {...text} 
- placeholder = 'text'
+ <input 
+    {...text} 
+    placeholder = 'text'
  /> 
- <input {...email} /> 
 
-   </div>
+   </form>
 )
 
  }
+
+ // functionality 
