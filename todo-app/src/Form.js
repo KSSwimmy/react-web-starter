@@ -1,25 +1,28 @@
-// import React, { useState } from 'react';
-// import useInputValue from './useInputValue'
+ import React, { useState } from 'react';
 
 
-// export default ({onSubmit}) => {
-//     const text = useInputValue('')
-   
+ const useInputValue = initialValue => {
+   const [value, setValue] = useState(initialValue);
 
+   return {
+     value,
+     onChange: event => setValue(event.target.value)
+   };
+ };
 
-//     return (
-//         <form onSubmit={event => {
-//             event.preventDefault() 
-//             onSubmit(text.value);
-//         }}>
+ export default ({onSubmit}) => {
+   const text = useInputValue('');
+   const email = useInputValue('')
 
-//             <input 
-//             {...text}
-//             /> 
+  return (
+   <div> 
 
-//             {/* <useInputValue /> */}
+ <input {...text} 
+ placeholder = 'text'
+ /> 
+ <input {...email} /> 
 
-//         </form> 
+   </div>
+)
 
-        
-//     )}
+ }
