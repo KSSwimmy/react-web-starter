@@ -1,44 +1,50 @@
-import React, { useState } from 'react';
-import Form from './Form'
+import React, { Component } from 'react';
+//import Form from './Form'
 import './App.css';
 
-export default () => {
-  const [count, setCount] = useState(0);
-  const [todos, setTodos] = useState([]);
-  const toggleComplete = (i) => setTodos (todos.map((todo, currentLocation) => currentLocation === i ? {
-    ...todo,
-   complete: !todo.complete
-  } :  
-  todo
-  
-    )
-  )
 
-  return (
-    <div className="App">
-      <div>
-         count: {count} 
+export class Todo extends Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: [],
+      newTodo: ''
+    }
+  }
 
-         <button onClick={() => setCount(count+ 1)}>
-           +
-         </button>
+  handleChange(event) {
+    const {value} = event.target;
+    //destructuring same thing as const value = event.target.value
+  this.setState({newTodo: value})
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    const todos = [...this.state.todos, this.state.newTodo];
+    this.setState({todos, newTodo: ''});
+  }
+ 
+  render() {
+    return(
+      <div> 
+        <form> 
+          <input
+          onChange={this.handleChange.bind(this)} // onChange allows you to type. 
+          value={this.state.newTodo} //whatever is in the input box
+          type=" text" 
+          placeholder= "new todo"
+          /> 
+          <button 
+          onClick={this.handleClick.bind(this)}>create</button> 
+          {/* onClick - clicking the button to make the todo show on the screen */}
+        </form>
+        <ul> 
+          {this.state.todos.map(todo => <li>{todo}</li>)} 
+          {/* lists the new todos */}
+        </ul>
       </div>
-      <Form onSubmit={text => setTodos([{text, complete: false}, ...todos]) } />
-
-      <div>
-        {
-          todos.map(({ text, complete }, i) => ( <div key={text} onClick={() => toggleComplete(i)} 
-          style= {{
-            textDecoration: complete ? 'line-through' : ''
-          }}>
-          {text}</div>
-            ))
-        }
-      </div>
-      <button onClick ={() => setTodos([])}>
-        reset
-      </button>
-
-    </div>
-  );
+    );
+  }
 }
+
+export default Todo;
