@@ -6,18 +6,20 @@
 
    return {
      value,
-     onChange: event => setValue(event.target.value)
+     onChange: event => setValue(event.target.value),
+     resetValue:  () => setValue('')
    };
  };
 
  export default ({onSubmit}) => {
-   const text = useInputValue('');
+   const {resetValue, ...text} = useInputValue('');
    
 
   return (
    <form onSubmit={event => {
      event.preventDefault();
      onSubmit(text.value)
+     resetValue();
   }} > 
 
  <input 
