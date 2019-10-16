@@ -4,7 +4,15 @@ import './App.css';
 
 export default () => {
   const [count, setCount] = useState(0);
-  const [todo, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
+  const toggleComplete = (i) => setTodos (todos.map((todo, currentLocation) => currentLocation === i ? {
+    ...todo,
+   complete: !todo.complete
+  } :  
+  todo
+  
+    )
+  )
 
   return (
     <div className="App">
@@ -15,14 +23,21 @@ export default () => {
            +
          </button>
       </div>
-      <Form onSubmit={text => setTodo([{text, complete: false}, ...todo]) } />
+      <Form onSubmit={text => setTodos([{text, complete: false}, ...todos]) } />
 
       <div>
         {
-          todo.map(({ text }) => ( <div key={text}>{text}</div>
+          todos.map(({ text, complete }, i) => ( <div key={text} onClick={() => toggleComplete(i)} 
+          style= {{
+            textDecoration: complete ? 'line-through' : ''
+          }}>
+          {text}</div>
             ))
         }
       </div>
+      <button onClick ={() => setTodos([])}>
+        reset
+      </button>
 
     </div>
   );

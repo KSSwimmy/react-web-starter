@@ -14,6 +14,7 @@
  export default ({onSubmit}) => {
    const {resetValue, ...text} = useInputValue('');
    
+   
 
   return (
    <form onSubmit={event => {
@@ -24,7 +25,7 @@
 
  <input 
     {...text} 
-    placeholder = 'text'
+    placeholder = 'todo'
  /> 
 
    </form>
